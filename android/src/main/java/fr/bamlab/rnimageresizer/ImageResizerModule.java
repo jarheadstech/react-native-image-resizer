@@ -56,13 +56,7 @@ class ImageResizerModule extends ReactContextBaseJavaModule {
 
         // If resizedImagePath is empty and this wasn't caught earlier, throw.
         if (resizedImage.isFile()) {
-            WritableMap response = Arguments.createMap();
-            response.putString("path", resizedImage.getAbsolutePath());
-            response.putString("uri", Uri.fromFile(resizedImage).toString());
-            response.putString("name", resizedImage.getName());
-            response.putDouble("size", resizedImage.length());
-            // Invoke success
-            successCb.invoke(response);
+            successCb.invoke("file:" + resizedImage);
         } else {
             failureCb.invoke("Error getting resized image path");
         }
